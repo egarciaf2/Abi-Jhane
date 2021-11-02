@@ -22,6 +22,13 @@ module.exports = (sequelize, type) => {
                     key: "idAsignacion",
                  }
             },
+            notaTotal: {
+                type: type.STRING(50),
+                allowNull: false,
+                validate: {
+                    notEmpty: true
+                }
+            },
             fecha_crea: {
                 type: type.DATE,
                 allowNull: false,

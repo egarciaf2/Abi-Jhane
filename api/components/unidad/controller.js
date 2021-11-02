@@ -3,8 +3,8 @@ const { Unidad } = require("../../../store/db");
 
 const insert = async (req) => {
     let response = {};
-    let { descripcionUnidad, idAsignacion } = req.body;
-    let itemInsert = await Unidad.create({ descripcionUnidad, idAsignacion });
+    let { descripcionUnidad, idAsignacion, notaTotal } = req.body;
+    let itemInsert = await Unidad.create({ descripcionUnidad, idAsignacion, notaTotal });
     response.code = 1;
     response.data = itemInsert;
     
@@ -28,10 +28,11 @@ const update = async (req) => {
         });
 
         if (dataActual) {
-            let { descripcionUnidad, idAsignacion } = req.body;
+            let { descripcionUnidad, idAsignacion, notaTotal } = req.body;
             let data = {
                 descripcionUnidad,
                 idAsignacion,
+                notaTotal,
                 fecha_ult_mod:new Date()
             }
             const resultado = await Unidad.update(data, {

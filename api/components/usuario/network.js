@@ -31,8 +31,18 @@ const update = (req, res, next) => {
 }
 
 
+const login = (req, res, next) => {
+    controller.login(req)
+        .then((data) => {
+            response.success(req, res, data, 200);
+        })
+        .catch(next);
+}
+
+
 router.post('/', registrar);
 router.get('/', list);
+router.post('/login', login);
 router.put('/:id', update);
 
 module.exports = router;

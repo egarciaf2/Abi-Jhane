@@ -33,10 +33,6 @@ const EstudianteModel = require('./models/estudiante');
 const CursoModel = require('./models/curso');
 const GradoModel = require('./models/grado');
 const UnidadModel = require('./models/unidad');
-const ActitudinalModel = require('./models/actitudinal');
-const ProcedimentalModel = require('./models/procedimental');
-const NotaActitudinalModel = require('./models/nota_actitudinal');
-const NotaProcedimentalModel = require('./models/nota_procedimental');
 const AsignacionModel = require('./models/asignacion');
 const TipodePagoModel = require('./models/tipo_de_pago');
 const CuentaBancariaModel = require('./models/cuenta_bancaria');
@@ -51,10 +47,6 @@ const Estudiante = EstudianteModel(confiBd, Sequelize);
 const Curso = CursoModel(confiBd, Sequelize);
 const Grado = GradoModel(confiBd, Sequelize);
 const Unidad = UnidadModel(confiBd, Sequelize);
-const Actitudinal = ActitudinalModel(confiBd, Sequelize);
-const Procedimental = ProcedimentalModel(confiBd, Sequelize);
-const NotaActitudinal = NotaActitudinalModel(confiBd, Sequelize);
-const NotaProcedimental = NotaProcedimentalModel(confiBd, Sequelize);
 const Asignacion = AsignacionModel(confiBd, Sequelize);
 const TipodePago = TipodePagoModel(confiBd, Sequelize);
 const CuentaBancaria = CuentaBancariaModel(confiBd, Sequelize);
@@ -88,30 +80,6 @@ Estudiante.belongsTo(EncargadoEstudiante,{
 Estudiante.belongsTo(Usuario,{
   as: "Usuario",
   foreignKey: "idUsuario",
-  onDelete: "CASCADE",
-});
-
-NotaActitudinal.belongsTo(Actitudinal,{
-  as: "Actitudinal",
-  foreignKey: "idActitudinal",
-  onDelete: "CASCADE",
-});
-
-NotaActitudinal.belongsTo(Unidad,{
-  as: "Unidad",
-  foreignKey: "idUnidad",
-  onDelete: "CASCADE",
-});
-
-NotaProcedimental.belongsTo(Procedimental,{
-  as: "Procedimental",
-  foreignKey: "idProcedimental",
-  onDelete: "CASCADE",
-});
-
-NotaProcedimental.belongsTo(Unidad,{
-  as: "Unidad",
-  foreignKey: "idUnidad",
   onDelete: "CASCADE",
 });
 
@@ -169,6 +137,7 @@ Servicio.belongsTo(TipodePago,{
   onDelete: "CASCADE",
 });
 
+
 db.sequelize.sync();
 
 try {
@@ -196,10 +165,6 @@ module.exports = {
   Curso,
   Grado,
   Unidad,
-  Actitudinal,
-  Procedimental,
-  NotaActitudinal,
-  NotaProcedimental,
   Asignacion,
   TipodePago,
   CuentaBancaria,

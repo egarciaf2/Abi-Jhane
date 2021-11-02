@@ -1,13 +1,14 @@
-const { Usuario } = require("../../../store/db");
+const { Usuario, TipoUsuario } = require("../../../store/db");
+
 
 
 const insert = async (req) => {
     let response = {};
-    let { usuario, contraseña, descripcionUsuario, estadoUsuario, idTipoUsuario} = req.body;
-    let itemInsert = await Usuario.create({ usuario, contraseña, descripcionUsuario, estadoUsuario, idTipoUsuario  });
+    let { usuario, contraseña, descripcionUsuario, estadoUsuario, idTipoUsuario } = req.body;
+    let itemInsert = await Usuario.create({ usuario, contraseña, descripcionUsuario, estadoUsuario, idTipoUsuario });
     response.code = 1;
     response.data = itemInsert;
-    
+
     return response;
 
 }
@@ -15,9 +16,37 @@ const insert = async (req) => {
 const list = async (req) => {
     let response = {};
     response.code = 1;
-    response.data = await Usuario.findAll();
+    response.data = await Usuario.findAll({
+        include: [{
+            model: TipoUsuario,
+            as: "TipoUsuario",
+            required: true
+        }
+        ]
+    });
     return response;
 }
+
+const login = async (req) => {
+    let response = {};
+    let {username,password}=req.body;
+
+    
+    let data = await Usuario.findOne({
+        where:{usuario:username,contraseña:password}
+    });
+    if(data){
+        response.code=1;
+        response.data=data;
+    }else{
+        response.code=-1;
+        response.data='Credenciales invalidas';
+    }
+    
+
+    return response;
+}
+
 
 const update = async (req) => {
     let response = {};
@@ -28,18 +57,18 @@ const update = async (req) => {
         });
 
         if (dataActual) {
-            let { usuario, contraseña, descripcionUsuario, estadoUsuario, idTipoUsuario  } = req.body;
+            let { usuario, contraseña, descripcionUsuario, estadoUsuario, idTipoUsuario } = req.body;
             let data = {
                 usuario,
                 contraseña,
                 descripcionUsuario,
                 estadoUsuario,
                 idTipoUsuario,
-                fecha_ult_mod:new Date()
+                fecha_ult_mod: new Date()
             }
             const resultado = await Usuario.update(data, {
                 where: {
-                    idUsuario:id
+                    idUsuario: id
                 }
             });
 
@@ -68,5 +97,6 @@ const update = async (req) => {
 module.exports = {
     insert,
     list,
-    update
+    update,
+    login
 }
