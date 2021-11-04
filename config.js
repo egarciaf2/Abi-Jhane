@@ -20,7 +20,7 @@
 
 module.exports = {
   api: {
-    port: process.env.API_PORT || 3000,
+    port: process.env.API_PORT || 8000,
   },
   bd: {
     database: "d4vf4a9mti8ru",
