@@ -39,6 +39,4 @@ app.use('/api/servicio', Servicio);
 
 app.use(errors);
 
-app.listen(config.api.port, function() {
-    console.log('Api escuchando en el puerto ', config.api.port);
-});
+app.listen(config.api.port || 5000);
