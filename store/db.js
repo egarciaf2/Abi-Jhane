@@ -144,21 +144,21 @@ Servicio.belongsTo(TipodePago,{
 
 db.sequelize.sync();
 
-try {
-  confiBd.sync({
-    force: false,
-  }).then(() => {
-    confiBd.query("select count(*) as total from tipoUsuario", {
-      type: QueryTypes.SELECT
-    }).then(async (resultado) => {
-      if (resultado[0].total === 0) {
-        await TipoUsuario.bulkCreate(listTipoUsuario);
-      }
-    });
-  });
-} catch (e) {
-  console.error(e);
-}
+// try {
+//   confiBd.sync({
+//     force: false,
+//   }).then(() => {
+//     confiBd.query("select count(*) as total from tipoUsuario", {
+//       type: QueryTypes.SELECT
+//     }).then(async (resultado) => {
+//       if (resultado[0].total === 0) {
+//         await TipoUsuario.bulkCreate(listTipoUsuario);
+//       }
+//     });
+//   });
+// } catch (e) {
+//   console.error(e);
+// }
 
 module.exports = {
   TipoUsuario,
