@@ -13,6 +13,10 @@ const confiBd = new Sequelize(
     dialectOptions: {
       dateStrings: true,
       typeCast: true,
+      ssl: {
+        require: true, // This will help you. But you will see nwe error
+        rejectUnauthorized: false // This line will fix new error
+      }
     },
     logging: true, //Evitamos que nos muestre lo que hace con la bd
     timezone: "-06:00",

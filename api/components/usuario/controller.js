@@ -19,7 +19,7 @@ const list = async (req) => {
     response.data = await Usuario.findAll({
         include: [{
             model: TipoUsuario,
-            as: "TipoUsuario",
+            as: "tipoUsuario",
             required: true
         }
         ]
