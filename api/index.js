@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const config = require('../config');
 const errors = require('../network/errors');
+const PORT = process.env.PORT || 5000;
 require("../store/db");
 
 const TipoUsuario = require('./components/tipoUsuario/network');
@@ -39,4 +40,4 @@ app.use('/api/servicio', Servicio);
 
 app.use(errors);
 
-app.listen(config.api.port || 5000);
+app.listen(PORT);
